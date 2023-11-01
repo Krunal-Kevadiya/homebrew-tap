@@ -1,0 +1,91 @@
+name: brew test-bot
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test-bot:
+    strategy:
+      matrix:
+        os: [macos-13]
+      #  os: [ubuntu-22.04, macos-12, macos-13, macos-14]
+
+    runs-on: ${{ matrix.os }}
+  
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Cache Homebrew Bundler RubyGems
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.set-up-homebrew.outputs.gems-path }}
+          key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
+          restore-keys: ${{ runner.os }}-rubygems-
+
+      - name: Install Homebrew Bundler RubyGems
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: brew install-bundler-gems
+
+      - run: brew test-bot --only-cleanup-before
+
+      - run: brew test-bot --only-setup
+
+      - run: brew test-bot --only-tap-syntax
+
+      - run: brew test-bot --only-formulae
+        if: github.event_name == 'pull_request'
+
+      - name: Get Asset name
+        shell: bash
+        run: |
+          export PKG=$(ls ./ | grep tar)
+          set -- $PKG
+          export NAME=$(echo $1 | sed "s/--/-/g")
+          export FILE_NAME=$(echo $NAME | sed "s/bottle.[0-9].tar.gz/bottle.tar.gz/g")
+          export RELEASE_NAME=$(echo $FILE_NAME | sed 's/[^0-9]+*/./g' | sed -e 's/\.\.\.//g' | cut -f1,2,3 -d'.')
+          echo "fileName=$FILE_NAME" >> $GITHUB_ENV
+          echo "releaseName=$RELEASE_NAME" >> $GITHUB_ENV
+
+      - name: Upload bottles as artifact
+        if: github.event_name == 'pull_request'
+        uses: kittaakos/upload-artifact-as-is@v0
+        with:
+          path: '*.bottle.*'
+      
+      - name: Download bottles as artifact
+        if: github.event_name == 'pull_request'
+        uses: actions/download-artifact@v3
+        with:
+          path: artifacts
+
+      - name: Release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: ${{ env.releaseName }}
+          tag_name: ${{ env.releaseName }}
+          body_path: README.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.HOMEBREW_GITHUB_API_TOKEN }}
+
+      - name: Upload bottles as artifact to release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.HOMEBREW_GITHUB_API_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: /Users/runner/work/homebrew-tap/homebrew-tap/artifacts/
+          asset_name: ${{ env.fileName }}
+          asset_content_type: application/gzip
