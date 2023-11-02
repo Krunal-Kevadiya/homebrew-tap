@@ -2,19 +2,20 @@ class Krupy < Formula
   include Language::Python::Virtualenv
   desc "Utility for rendering projects templates"
   homepage "https://github.com/Krunal-Kevadiya/krupy"
-  url "https://github.com/Krunal-Kevadiya/krupy/archive/refs/tags/0.1.8.zip"
-  sha256 "9ce534e49d21dbe546356f91d1cd63ac5d3021e6ab1338be484cb949506ee582"
+  url "https://github.com/Krunal-Kevadiya/krupy/archive/refs/tags/0.1.8.tar.gz"
+  sha256 "ad54f3313868e27a731e9d7a29a2b4ac567a1c549a3c0c956a0fcd23dcfe8c29"
   license "MIT"
   head "https://github.com/Krunal-Kevadiya/krupy.git", branch: "main"
   bottle do
-    root_url "https://github.com/Krunal-Kevadiya/krupy/releases/download/krupy-0.1.8"
-    # sha256 cellar: :any,                 arm64_sonoma:   "b9731386cf74f86d994f610269d2732417ec4e7dcd4ed982c37c8ee6e84f77df"
-    # sha256 cellar: :any,                 arm64_ventura:  "ce595634fbdb0d203793caac6a43b62d599aa876e00b936a4fc24d35ab79b15c"
-    # sha256 cellar: :any,                 arm64_monterey: "4e39d908acf964c2b1a08964f3c44e4adf79c602bf68c8c1e4766cce374941f1"
-    # sha256 cellar: :any,                 sonoma:         "8319c3a9cbedccdafbff303dd76baf8df155594fbb42cbf757542dec04b55afd"
-    # sha256 cellar: :any,                 ventura:        "51d41549424d8a4c7d0c9b2e5b80e05bfccd505642093e6da652c0a4a3282f9c"
-    sha256 cellar: :any,                 monterey:       "7156ec5b5284c437da40bc92693d47fded3a6110cbce85996c134f518643c416"
-    # sha256 cellar: :any_skip_relocation, x86_64_linux:   "467cc9e7744b89adde30ead2d075e667198a7fa4ebc3f55a7ebd9337acb3dda9"
+    root_url "https://github.com/Krunal-Kevadiya/krupy/releases/download/0.1.8"
+    # sha256 cellar: :any, arm64_sonoma: "b9731386cf74f86d994f610269d2732417ec4e7dcd4ed982c37c8ee6e84f77df"
+    # sha256 cellar: :any, arm64_ventura: "ce595634fbdb0d203793caac6a43b62d599aa876e00b936a4fc24d35ab79b15c"
+    # sha256 cellar: :any, arm64_monterey: "4e39d908acf964c2b1a08964f3c44e4adf79c602bf68c8c1e4766cce374941f1"
+    # sha256 cellar: :any, sonoma: "8319c3a9cbedccdafbff303dd76baf8df155594fbb42cbf757542dec04b55afd"
+    # sha256 cellar: :any, ventura: "51d41549424d8a4c7d0c9b2e5b80e05bfccd505642093e6da652c0a4a3282f9c"
+    sha256 cellar: :any, monterey: "7156ec5b5284c437da40bc92693d47fded3a6110cbce85996c134f518643c416"
+    # sha256 cellar: :any_skip_relocation, x86_64_linux:
+    # "467cc9e7744b89adde30ead2d075e667198a7fa4ebc3f55a7ebd9337acb3dda9"
   end
   depends_on "rust" => :build
   depends_on "pygments"
