@@ -12,10 +12,9 @@ class Krupy < Formula
     # sha256 cellar: :any, arm64_ventura: "ce595634fbdb0d203793caac6a43b62d599aa876e00b936a4fc24d35ab79b15c"
     # sha256 cellar: :any, arm64_monterey: "4e39d908acf964c2b1a08964f3c44e4adf79c602bf68c8c1e4766cce374941f1"
     # sha256 cellar: :any, sonoma: "8319c3a9cbedccdafbff303dd76baf8df155594fbb42cbf757542dec04b55afd"
-    # sha256 cellar: :any, ventura: "51d41549424d8a4c7d0c9b2e5b80e05bfccd505642093e6da652c0a4a3282f9c"
-    sha256 cellar: :any, monterey: "7156ec5b5284c437da40bc92693d47fded3a6110cbce85996c134f518643c416"
-    # sha256 cellar: :any_skip_relocation, x86_64_linux:
-    # "467cc9e7744b89adde30ead2d075e667198a7fa4ebc3f55a7ebd9337acb3dda9"
+    sha256 cellar: :any, ventura: "9ccb0e6ae21820a86bc3e43b1414c37b595ffbb68bc2190b1cc45907eab471d0"
+    sha256 cellar: :any, monterey: "901683d03c7928909e88ee590566c83f3e0233b6135df527327ab8a309160ea1"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "b0950c2428fd96ab399f64eccb0bc7221ad909c15cbb8f07ea93c3523eb7e1e8"
   end
   depends_on "rust" => :build
   depends_on "pygments"
