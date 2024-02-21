@@ -2,19 +2,20 @@ class Krupy < Formula
   include Language::Python::Virtualenv
   desc "Utility for rendering projects templates"
   homepage "https://github.com/Krunal-Kevadiya/krupy"
-  url "https://github.com/Krunal-Kevadiya/krupy/archive/refs/tags/0.1.8.tar.gz"
-  sha256 "ad54f3313868e27a731e9d7a29a2b4ac567a1c549a3c0c956a0fcd23dcfe8c29"
+  url "https://github.com/Krunal-Kevadiya/krupy/archive/refs/tags/2.0.0.tar.gz"
+  sha256 "82c2459e42fcc0299390c40d5c115047ad0351189ddc6e031d76ee2dcacfad7d"
   license "MIT"
   head "https://github.com/Krunal-Kevadiya/krupy.git", branch: "main"
   bottle do
-    root_url "https://github.com/Krunal-Kevadiya/krupy/releases/download/0.1.8"
+    root_url "https://github.com/Krunal-Kevadiya/krupy/releases/download/2.0.0"
     # sha256 cellar: :any, arm64_sonoma: "b9731386cf74f86d994f610269d2732417ec4e7dcd4ed982c37c8ee6e84f77df"
     # sha256 cellar: :any, arm64_ventura: "ce595634fbdb0d203793caac6a43b62d599aa876e00b936a4fc24d35ab79b15c"
     # sha256 cellar: :any, arm64_monterey: "4e39d908acf964c2b1a08964f3c44e4adf79c602bf68c8c1e4766cce374941f1"
     # sha256 cellar: :any, sonoma: "8319c3a9cbedccdafbff303dd76baf8df155594fbb42cbf757542dec04b55afd"
-    sha256 cellar: :any, ventura: "9ccb0e6ae21820a86bc3e43b1414c37b595ffbb68bc2190b1cc45907eab471d0"
-    sha256 cellar: :any, monterey: "901683d03c7928909e88ee590566c83f3e0233b6135df527327ab8a309160ea1"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "b0950c2428fd96ab399f64eccb0bc7221ad909c15cbb8f07ea93c3523eb7e1e8"
+    # sha256 cellar: :any, ventura: "9ccb0e6ae21820a86bc3e43b1414c37b595ffbb68bc2190b1cc45907eab471d0"
+    # sha256 cellar: :any, monterey: "901683d03c7928909e88ee590566c83f3e0233b6135df527327ab8a309160ea1"
+    # sha256 cellar: :any_skip_relocation,
+    # x86_64_linux: "b0950c2428fd96ab399f64eccb0bc7221ad909c15cbb8f07ea93c3523eb7e1e8"
   end
   depends_on "rust" => :build
   depends_on "pygments"
